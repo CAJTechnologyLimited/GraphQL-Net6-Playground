@@ -11,6 +11,8 @@ public class Superhero
 
     public string Description { get; set; }
     public double Height { get; set; }
-    public ICollection<Superpower> Superpowers { get; set; }
-    public ICollection<Movie> Movies { get; set; }
+
+    [UseSorting] public ICollection<Superpower> Superpowers { get; set; }
+
+    [UseSorting] public ICollection<Movie> Movies { get; set; }
 }
