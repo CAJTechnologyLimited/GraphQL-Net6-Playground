@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-//var configuration = builder.Configuration;
+var configuration = builder.Configuration;
 
 // Add services to the container.
 
@@ -16,14 +16,14 @@ builder.Services.AddScoped<ISuperpowerRepository, SuperpowerRepository>();
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 
 // Register GraphQL services
-builder.Services.AddGraphQLServer().AddQueryType<Query>();
+builder.Services.AddGraphQLServer().AddQueryType<Query>().AddProjections().AddFiltering().AddSorting();
 
 // Add Application Db Context options
-//builder.Services.AddDbContext<ApplicationDbContext>(options =>
-//    options.UseSqlServer(configuration.GetConnectionString("SqlServer")));
-// Use in memory database for ease
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseInMemoryDatabase(databaseName: "SuperHeroes"));
+    options.UseSqlServer(configuration.GetConnectionString("SqlServer")));
+// Use in memory database for ease
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//    options.UseInMemoryDatabase(databaseName: "SuperHeroes"));
 
 var app = builder.Build();
 
