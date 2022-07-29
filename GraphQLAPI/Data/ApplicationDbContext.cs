@@ -20,9 +20,4 @@ public class ApplicationDbContext : DbContext
         builder.ApplyConfiguration(new SuperpowerContextConfiguration(ids));
         builder.ApplyConfiguration(new MovieContextConfiguration(ids));
     }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        base.OnConfiguring(optionsBuilder);
-    }
 }

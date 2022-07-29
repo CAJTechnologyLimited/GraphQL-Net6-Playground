@@ -2,6 +2,9 @@
 
 public class Query
 {
-    public IQueryable<Superhero> GetSuperheroes =>
-        new List<Superhero>().AsQueryable();
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+    public IQueryable<Superhero> GetSuperheroes([Service] ApplicationDbContext context) =>
+        context.Superheroes;
 }
